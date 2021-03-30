@@ -1,5 +1,5 @@
 const taskTemplate = `
-  <div class="task">
+  <div class="task" draggable="true">
     <p class="task-title">{title}</p>
     <div class="task-details">
       <div class="task-info">
@@ -38,7 +38,7 @@ const tasks = {
   inProgress: [],
   done: [],
 };
-
+dragAndDrop();
 const backlog = document.querySelector(".board section:first-child .tasks");
 const addTaskButton = document
   .getElementById("addTask")
@@ -76,6 +76,7 @@ function addTask(title, taskType, priority) {
     taskTemplate
   );
   backlog.appendChild(task);
+  dragAndDrop();
 }
 
 function showForm() {
@@ -171,4 +172,44 @@ function showAddForm() {
     `.trim();
 
   return compileToNode(formString);
+}
+
+function dragAndDrop() {
+  const lists = document.querySelectorAll(".list");
+  const listItems = document.querySelectorAll(".task");
+
+  let draggedItem = null;
+
+  listItems.forEach((valueOne, indexOne) => {
+    const item = valueOne;
+
+    item.addEventListener("dragstart", function () {
+      draggedItem = item;
+      setTimeout(function () {
+        item.style.display = "none";
+      }, 0);
+    });
+
+    item.addEventListener("dragend", function () {
+      setTimeout(function () {
+        draggedItem.style.display = "block";
+        draggedItem = null;
+      }, 0);
+    });
+
+    lists.forEach((valueTwo, indexTwo) => {
+      const lists = valueTwo;
+      const taskSection = lists.querySelectorAll(".tasks")[0];
+
+      lists.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      });
+      lists.addEventListener("dragenter", function (e) {
+        e.preventDefault();
+      });
+      lists.addEventListener("drop", function (e) {
+        taskSection.append(draggedItem);
+      });
+    });
+  });
 }

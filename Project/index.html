@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Management</title>
-    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
   </head>
 
   <body>
@@ -24,10 +24,10 @@
       <main>
         <h1>JIRA board</h1>
         <div class="board">
-          <section>
+          <section class="list">
             <h5 class="section-title">Backlog <span>4</span></h5>
             <div class="tasks">
-              <div class="task">
+              <div class="task" draggable="true">
                 <i class="delete-task fa fa-trash icon-red"></i>
                 <p class="task-title">My first task</p>
                 <div class="task-details">
@@ -48,26 +48,26 @@
             </div>
           </section>
 
-          <section>
+          <section class="list">
             <h5 class="section-title">
               Selected for development <span>4</span>
             </h5>
             <div class="tasks"></div>
           </section>
 
-          <section>
+          <section class="list">
             <h5 class="section-title">In progress <span>4</span></h5>
             <div class="tasks"></div>
           </section>
 
-          <section>
+          <section class="list">
             <h5 class="section-title">Done <span>4</span></h5>
             <div class="tasks"></div>
           </section>
         </div>
       </main>
     </div>
-
-    <script type="module" src="src/app.js"></script>
+    <script type="module" src="./src/app.js"></script>
+    <script type="module" src="./src/mywork.js"></script>
   </body>
 </html>
