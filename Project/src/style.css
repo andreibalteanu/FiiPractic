@@ -25,7 +25,7 @@ body {
 aside {
   background: #0747a6;
   color: #ffffff;
-  padding: 1em;
+  padding: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -43,13 +43,16 @@ aside button {
   outline: none;
 }
 
+aside button i {
+  margin-right: 30px;
+}
+
 .icon-btn {
   cursor: pointer;
   width: 100%;
   margin-bottom: 1.5em;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .icon-btn:hover {
@@ -78,6 +81,27 @@ main {
 h1 {
   font-weight: 500;
   margin-bottom: 1em;
+}
+.filterSection {
+  display: none;
+}
+.filterElements {
+  display: flex;
+  flex-direction: row;
+}
+
+.type,
+.priority {
+  display: flex;
+  align-items: center;
+}
+
+.filterTitle {
+  margin-left: 20px;
+}
+
+.fa-times-circle {
+  margin-left: 20px;
 }
 
 .board {

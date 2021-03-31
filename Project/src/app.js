@@ -173,6 +173,7 @@ function showAddForm() {
 
   return compileToNode(formString);
 }
+//DRAG AND DROP
 
 function dragAndDrop() {
   const lists = document.querySelectorAll(".list");
