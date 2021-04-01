@@ -62,6 +62,7 @@ function compileTaskTemplate(title, tag, taskType, priority, template) {
 }
 
 function addTask(title, taskType, priority) {
+  console.log(title, taskType, priority);
   const newTask = {
     title: title,
     taskType: taskType,
@@ -213,18 +214,6 @@ function dragAndDrop() {
   });
 }
 
-//FETCH API
-
-const getTasks = () => {
-  fetch("https://605dc9029386d200171bb3c2.mockapi.io/task")
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-};
-
-(function () {
-  getTasks();
-})();
-
 //SEARCH INPUT
 
 function showSearchInput() {
@@ -299,4 +288,19 @@ function toggleSidebar() {
     sideBar.style.width = "80px";
     mini = true;
   }
+}
+
+//FETCH API
+
+const getTasks = (function () {
+  fetch("https://605dc9029386d200171bb3c2.mockapi.io/task")
+    .then((response) => response.json())
+    .then((data) => addFetchedTasks(data));
+})();
+
+function addFetchedTasks(data) {
+  data.forEach((value, index) => {
+    console.log(value);
+    addTask(value.title, value.type, value.priority);
+  });
 }
