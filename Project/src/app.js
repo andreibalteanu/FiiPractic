@@ -236,12 +236,16 @@ function showSearchInput() {
 function removeSearchInput() {
   const mainPage = document.getElementsByTagName("main")[0];
   mainPage.removeChild(mainPage.childNodes[2]);
+  const taskList = document.querySelectorAll(".task");
+  taskList.forEach((value, index) => {
+    value.style.display = "";
+  });
 }
 
 function validateSearchInput() {
   const input = document.getElementById("textInput");
   filter = input.value.toUpperCase();
-  taskList = document.querySelectorAll(".task");
+  const taskList = document.querySelectorAll(".task");
   taskList.forEach((value, index) => {
     contentTask = value.querySelector(".task-title");
     if (
