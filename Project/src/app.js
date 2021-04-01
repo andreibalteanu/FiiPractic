@@ -225,7 +225,7 @@ const getTasks = () => {
   getTasks();
 })();
 
-//SEARCH INPUT FUNCTIONS
+//SEARCH INPUT
 
 function showSearchInput() {
   if (document.querySelectorAll(".searchSection").length > 0) return null;
@@ -281,10 +281,22 @@ const filters = (function () {
 
 //SIDEBAR TRANSITION
 
-function testIn() {
-  console.log("hovering in sidebar");
-}
+var mini = true;
 
-function testOut() {
-  console.log("hovering outside sidebar");
+function toggleSidebar() {
+  const iconDescription = document.querySelectorAll(".iconDescription");
+  const sideBar = document.getElementsByTagName("aside")[0];
+  if (mini) {
+    iconDescription.forEach((value, index) => {
+      value.style.display = "block";
+    });
+    sideBar.style.width = "200px";
+    mini = false;
+  } else {
+    iconDescription.forEach((value, index) => {
+      value.style.display = "none";
+    });
+    sideBar.style.width = "80px";
+    mini = true;
+  }
 }

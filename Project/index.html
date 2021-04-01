@@ -10,21 +10,21 @@
 
   <body>
     <div class="page">
-      <aside onmouseover="testIn()" onmouseout="testOut()">
+      <aside onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
         <div class="actions">
           <button class="icon-btn" id="searchTask">
             <i class="fa fa-search fa-2x"></i>
-            <h2>SEARCH</h2>
+            <h2 class="iconDescription">SEARCH</h2>
           </button>
           <br />
           <button class="icon-btn" id="addTask">
             <i class="fa fa-plus fa-2x"></i>
-            <h2>ADD</h2>
+            <h2 class="iconDescription">ADD</h2>
           </button>
           <br />
           <button class="icon-btn" id="filterTask">
             <i class="fas fa-filter fa-2x"></i>
-            <h2>FILTER</h2>
+            <h2 class="iconDescription">FILTER</h2>
           </button>
         </div>
         <div class="avatar"></div>
@@ -55,7 +55,6 @@
             <h5 class="section-title">Backlog <span>4</span></h5>
             <div class="tasks">
               <div class="task" draggable="true">
-                <i class="delete-task fa fa-trash icon-red"></i>
                 <p class="task-title">My first task</p>
                 <div class="task-details">
                   <div class="task-info">

@@ -25,10 +25,15 @@ body {
 aside {
   background: #0747a6;
   color: #ffffff;
+  width: 80px;
   padding: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: 0.3s;
+}
+.iconDescription {
+  display: none;
 }
 
 nav .actions {
@@ -68,6 +73,7 @@ aside button i {
   height: 3em;
   background-image: url("https://res.cloudinary.com/dvujyxh7e/image/upload/c_scale,w_48/v1593253478/trung-vo_bioxmc.png");
   border-radius: 100%;
+  align-self: center;
 }
 
 /****** END SIDENAV *****/
