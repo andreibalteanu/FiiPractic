@@ -40,6 +40,7 @@ const tasks = {
 };
 dragAndDrop();
 const backlog = document.querySelector(".board section:first-child .tasks");
+
 const addTaskButton = document
   .getElementById("addTask")
   .addEventListener("click", showForm);
@@ -179,38 +180,111 @@ function dragAndDrop() {
   const lists = document.querySelectorAll(".list");
   const listItems = document.querySelectorAll(".task");
 
-  let draggedItem = null;
+  let draggedItem = "";
 
-  listItems.forEach((valueOne, indexOne) => {
-    const item = valueOne;
+  lists.forEach((valueTwo, indexTwo) => {
+    const lists = valueTwo;
+    const taskSection = lists.querySelectorAll(".tasks")[0];
 
-    item.addEventListener("dragstart", function () {
-      draggedItem = item;
+    lists.addEventListener("dragstart", function (e) {
+      draggedItem = e.target;
+
       setTimeout(function () {
-        item.style.display = "none";
+        e.target.style.display = "none";
       }, 0);
     });
 
-    item.addEventListener("dragend", function () {
+    lists.addEventListener("dragend", function (e) {
       setTimeout(function () {
-        draggedItem.style.display = "block";
-        draggedItem = null;
+        e.target.style.display = "block";
+        draggedItem = "";
       }, 0);
     });
 
-    lists.forEach((valueTwo, indexTwo) => {
-      const lists = valueTwo;
-      const taskSection = lists.querySelectorAll(".tasks")[0];
-
-      lists.addEventListener("dragover", function (e) {
-        e.preventDefault();
-      });
-      lists.addEventListener("dragenter", function (e) {
-        e.preventDefault();
-      });
-      lists.addEventListener("drop", function (e) {
-        taskSection.append(draggedItem);
-      });
+    lists.addEventListener("dragover", function (e) {
+      e.preventDefault();
+    });
+    lists.addEventListener("dragenter", function (e) {
+      e.preventDefault();
+    });
+    lists.addEventListener("drop", function (e) {
+      taskSection.append(draggedItem);
     });
   });
+}
+
+//FETCH API
+
+const getTasks = () => {
+  fetch("https://605dc9029386d200171bb3c2.mockapi.io/task")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+};
+
+(function () {
+  getTasks();
+})();
+
+//SEARCH INPUT FUNCTIONS
+
+function showSearchInput() {
+  if (document.querySelectorAll(".searchSection").length > 0) return null;
+  else {
+    const searchSection = `<div class="searchSection">
+  <input type="text" name="taskname" id="taskname" placeholder="Search for task names.." onkeyup="validateSearchInput()" >
+  <i class="fas fa-times-circle"></i>
+  </div>`;
+    const mainTitle = document
+      .getElementsByTagName("h1")[0]
+      .insertAdjacentHTML("afterend", searchSection);
+    const removeButton = document
+      .querySelector(".fa-times-circle")
+      .addEventListener("click", removeSearchInput);
+  }
+}
+function removeSearchInput() {
+  const mainPage = document.getElementsByTagName("main")[0];
+  mainPage.removeChild(mainPage.childNodes[2]);
+}
+
+function validateSearchInput() {
+  console.log("HELLO");
+}
+
+const searchInput = (function () {
+  const searchIcon = document.querySelector("#searchTask");
+  searchIcon.addEventListener("click", showSearchInput);
+})();
+
+//FILTERS FUNCTIONS
+
+function showFilters() {
+  const filterSection = document.querySelector(".filterSection");
+  if (window.getComputedStyle(filterSection).display === "none")
+    filterSection.style.display = "block";
+  else filterSection.style.display = "none";
+
+  const removeFiltersButton = document
+    .querySelector(".fa-times-circle")
+    .addEventListener("click", removeFilters);
+}
+
+function removeFilters() {
+  const filterSection = document.querySelector(".filterSection");
+  filterSection.style.display = "none";
+}
+
+const filters = (function () {
+  const filterIcon = document.querySelector("#filterTask");
+  filterIcon.addEventListener("click", showFilters);
+})();
+
+//SIDEBAR TRANSITION
+
+function testIn() {
+  console.log("hovering in sidebar");
+}
+
+function testOut() {
+  console.log("hovering outside sidebar");
 }
