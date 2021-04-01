@@ -40,6 +40,9 @@ const tasks = {
 };
 dragAndDrop();
 const backlog = document.querySelector(".board section:first-child .tasks");
+const selForDev = document.querySelector(".board section:nth-child(2) .tasks");
+const inProg = document.querySelector(".board section:nth-child(3) .tasks");
+const done = document.querySelector(".board section:nth-child(4) .tasks");
 
 const addTaskButton = document
   .getElementById("addTask")
@@ -62,7 +65,6 @@ function compileTaskTemplate(title, tag, taskType, priority, template) {
 }
 
 function addTask(title, taskType, priority) {
-  console.log(title, taskType, priority);
   const newTask = {
     title: title,
     taskType: taskType,
@@ -220,7 +222,7 @@ function showSearchInput() {
   if (document.querySelectorAll(".searchSection").length > 0) return null;
   else {
     const searchSection = `<div class="searchSection">
-  <input type="text" name="taskname" id="taskname" placeholder="Search for task names.." onkeyup="validateSearchInput()" >
+  <input type="text" name="taskname" id="textInput" placeholder="Search for task names.." onkeyup="validateSearchInput()" >
   <i class="fas fa-times-circle"></i>
   </div>`;
     const mainTitle = document
@@ -237,7 +239,22 @@ function removeSearchInput() {
 }
 
 function validateSearchInput() {
-  console.log("HELLO");
+  const input = document.getElementById("textInput");
+  filter = input.value.toUpperCase();
+  taskList = document.querySelectorAll(".task");
+  taskList.forEach((value, index) => {
+    contentTask = value.querySelector(".task-title");
+    if (
+      value
+        .querySelector(".task-title")
+        .innerText.toUpperCase()
+        .indexOf(filter) > -1
+    ) {
+      value.style.display = "";
+    } else {
+      value.style.display = "none";
+    }
+  });
 }
 
 const searchInput = (function () {
@@ -300,7 +317,38 @@ const getTasks = (function () {
 
 function addFetchedTasks(data) {
   data.forEach((value, index) => {
-    console.log(value);
-    addTask(value.title, value.type, value.priority);
+    addTaskWithStatus(value.title, value.type, value.priority, value.status);
   });
+}
+
+function addTaskWithStatus(title, taskType, priority, status) {
+  const newTask = {
+    title: title,
+    taskType: taskType,
+    priority: priority,
+    tag: getId(taskType),
+  };
+  tasks.backlog.push(newTask);
+  const task = compileTaskTemplate(
+    newTask.title,
+    newTask.tag,
+    newTask.taskType,
+    newTask.priority,
+    taskTemplate
+  );
+  switch (status) {
+    case "backlog":
+      backlog.appendChild(task);
+      break;
+    case "inprogress":
+      inProg.appendChild(task);
+      break;
+
+    case "done":
+      done.appendChild(task);
+      break;
+    default:
+      backlog.appendChild(task);
+  }
+  dragAndDrop();
 }
