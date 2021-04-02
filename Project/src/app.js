@@ -282,7 +282,6 @@ function showFilters() {
 function removeFilters() {
   const filterSection = document.querySelector(".filterSection");
   filterSection.style.display = "none";
-  makeAllTasksVisible();
 }
 
 const filters = (function () {

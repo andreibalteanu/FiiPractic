@@ -88,13 +88,46 @@ h1 {
   font-weight: 500;
   margin-bottom: 1em;
 }
+.searchSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0747a6;
+  padding: 5px;
+  width: 250px;
+  height: 50px;
+}
 
+#textInput {
+  height: 35px;
+  width: 200px;
+}
 .filterSection {
   display: none;
 }
 .filterElements {
   display: flex;
+  align-items: center;
   flex-direction: row;
+  background-color: #0747a6;
+  height: 50px;
+  width: 950px;
+}
+
+.filterElements .fa-times-circle {
+  margin-left: 20px;
+  color: white;
+}
+
+.filterElements h5 {
+  color: white;
+  margin-right: 5px;
+}
+
+.filterButton {
+  height: 30px;
+  margin: 3px;
+  width: 100px;
 }
 
 .type,
@@ -107,8 +140,9 @@ h1 {
   margin-left: 20px;
 }
 
-.fa-times-circle {
+.searchSection .fa-times-circle {
   margin-left: 20px;
+  color: white;
 }
 
 .board {
