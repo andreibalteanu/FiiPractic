@@ -282,12 +282,119 @@ function showFilters() {
 function removeFilters() {
   const filterSection = document.querySelector(".filterSection");
   filterSection.style.display = "none";
+  makeAllTasksVisible();
 }
 
 const filters = (function () {
   const filterIcon = document.querySelector("#filterTask");
   filterIcon.addEventListener("click", showFilters);
 })();
+
+function changeTypeButtonColor(button) {
+  if (button.style.backgroundColor != "") {
+    button.style.backgroundColor = "";
+  } else {
+    checkIfTypeButtonPressed();
+    if (button.style.backgroundColor === "") {
+      button.style.backgroundColor = "#6a96d8";
+    } else button.style.backgroundColor = "";
+  }
+}
+
+function changePriorityButtonColor(button) {
+  if (button.style.backgroundColor != "") {
+    button.style.backgroundColor = "";
+  } else {
+    checkIfPriorityButtonPressed();
+    if (button.style.backgroundColor === "") {
+      button.style.backgroundColor = "#6a96d8";
+    } else button.style.backgroundColor = "";
+  }
+}
+
+function checkIfTypeButtonPressed() {
+  const allButtons = document.querySelectorAll(".filterTypeButton");
+  allButtons.forEach((value, index) => {
+    value.style.backgroundColor = "";
+  });
+}
+
+function checkIfPriorityButtonPressed() {
+  const allButtons = document.querySelectorAll(".filterPriorityButton");
+  allButtons.forEach((value, index) => {
+    value.style.backgroundColor = "";
+  });
+}
+
+function makeAllTasksVisible() {
+  const taskList = document.querySelectorAll(".task");
+  taskList.forEach((value, index) => {
+    value.style.display = "block";
+  });
+}
+
+function taskChecker(value, buttonID, iconColor) {
+  if (value.id === buttonID && iconColor === null) return true;
+  else return false;
+}
+
+function validateFilters() {
+  const allFilterButton = document.querySelectorAll(".filterButton");
+  const taskList = document.querySelectorAll(".task");
+  allFilterButton.forEach((value, index) => {
+    if (value.style.backgroundColor != "") {
+      //allFilterButtonPressed.push(value);
+      if (value.classList[1] === "filterTypeButton") {
+        taskList.forEach((task, index) => {
+          if (taskChecker(value, "taskB", task.querySelector(".icon-blue")))
+            task.style.display = "none";
+          if (taskChecker(value, "improvB", task.querySelector(".icon-teal")))
+            task.style.display = "none";
+          if (
+            taskChecker(
+              value,
+              "bugB",
+              task.querySelector(".task-type .icon-red")
+            )
+          )
+            task.style.display = "none";
+        });
+      }
+      if (value.classList[1] === "filterPriorityButton") {
+        taskList.forEach((task, index) => {
+          if (taskChecker(value, "lowB", task.querySelector(".icon-green")))
+            task.style.display = "none";
+          if (taskChecker(value, "medB", task.querySelector(".icon-yellow")))
+            task.style.display = "none";
+          if (taskChecker(value, "highB", task.querySelector(".icon-orange")))
+            task.style.display = "none";
+          if (
+            taskChecker(
+              value,
+              "urgentB",
+              task.querySelector(".task-priority .icon-red")
+            )
+          )
+            task.style.display = "none";
+        });
+      }
+    }
+  });
+
+  //foreach de taskuri in foreachdefiltreapasate
+  //de facut mai eficient, de comb cele doua foreach uri cu cel de sus somehow
+}
+
+function validateTypeFilters(e) {
+  changeTypeButtonColor(e.target);
+  makeAllTasksVisible();
+  validateFilters();
+}
+function validatePriorityFilters(e) {
+  changePriorityButtonColor(e.target);
+  makeAllTasksVisible();
+  validateFilters();
+}
 
 //SIDEBAR TRANSITION
 

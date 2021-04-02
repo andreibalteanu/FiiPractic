@@ -35,17 +35,59 @@
           <div class="filterElements">
             <div class="type filterTitle">
               <h5>Type:</h5>
-              <button class="filterButton">Task</button>
-              <button class="filterButton">Improvement</button>
-              <button class="filterButton">Bug</button>
+              <button
+                class="filterButton filterTypeButton"
+                id="taskB"
+                onclick="validateTypeFilters(event)"
+              >
+                Task
+              </button>
+              <button
+                class="filterButton filterTypeButton"
+                id="improvB"
+                onclick="validateTypeFilters(event)"
+              >
+                Improvement
+              </button>
+              <button
+                class="filterButton filterTypeButton"
+                id="bugB"
+                onclick="validateTypeFilters(event)"
+              >
+                Bug
+              </button>
             </div>
             <br />
             <div class="priority filterTitle">
               <h5>Priority:</h5>
-              <button class="filterButton">Low</button>
-              <button class="filterButton">Medium</button>
-              <button class="filterButton">High</button>
-              <button class="filterButton">Urgent</button>
+              <button
+                class="filterButton filterPriorityButton"
+                id="lowB"
+                onclick="validatePriorityFilters(event)"
+              >
+                Low
+              </button>
+              <button
+                class="filterButton filterPriorityButton"
+                id="medB"
+                onclick="validatePriorityFilters(event)"
+              >
+                Medium
+              </button>
+              <button
+                class="filterButton filterPriorityButton"
+                id="highB"
+                onclick="validatePriorityFilters(event)"
+              >
+                High
+              </button>
+              <button
+                class="filterButton filterPriorityButton"
+                id="urgentB"
+                onclick="validatePriorityFilters(event)"
+              >
+                Urgent
+              </button>
             </div>
             <i class="fas fa-times-circle"></i>
           </div>
