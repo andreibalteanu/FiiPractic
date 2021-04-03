@@ -181,12 +181,11 @@ function showAddForm() {
 
 function dragAndDrop() {
   const lists = document.querySelectorAll(".list");
-  const listItems = document.querySelectorAll(".task");
 
   let draggedItem = "";
 
-  lists.forEach((valueTwo, indexTwo) => {
-    const lists = valueTwo;
+  lists.forEach((value, index) => {
+    const lists = value;
     const taskSection = lists.querySelectorAll(".tasks")[0];
 
     lists.addEventListener("dragstart", function (e) {
@@ -282,6 +281,7 @@ function showFilters() {
 function removeFilters() {
   const filterSection = document.querySelector(".filterSection");
   filterSection.style.display = "none";
+  makeAllTasksVisible();
 }
 
 const filters = (function () {
@@ -342,7 +342,6 @@ function validateFilters() {
   const taskList = document.querySelectorAll(".task");
   allFilterButton.forEach((value, index) => {
     if (value.style.backgroundColor != "") {
-      //allFilterButtonPressed.push(value);
       if (value.classList[1] === "filterTypeButton") {
         taskList.forEach((task, index) => {
           if (taskChecker(value, "taskB", task.querySelector(".icon-blue")))
