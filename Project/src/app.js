@@ -1,6 +1,9 @@
 const taskTemplate = `
   <div class="task" draggable="true">
+    <div class="top-section-task">
     <p class="task-title">{title}</p>
+    <i class="fas fa-trash" onclick="deleteTask(event)"></i>
+    </div>
     <div class="task-details">
       <div class="task-info">
         <div class="avatar"></div>
@@ -460,4 +463,10 @@ function addTaskWithStatus(title, taskType, priority, status) {
       backlog.appendChild(task);
   }
   dragAndDrop();
+}
+
+//DELETE BUTTON
+
+function deleteTask(e) {
+  e.target.parentElement.parentElement.remove();
 }
