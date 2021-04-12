@@ -2,7 +2,7 @@ const taskTemplate = `
   <div class="task" draggable="true">
     <div class="top-section-task">
     <p class="task-title">{title}</p>
-    <i class="fas fa-trash" onclick="deleteTask(event)"></i>
+    <i class="fas fa-trash" onclick="deleteTask(event)" style="color:red;"></i>
     </div>
     <div class="task-details">
       <div class="task-info">
@@ -90,7 +90,10 @@ function showForm() {
   const form = document.body.appendChild(showAddForm());
   form.classList.add("show");
   const closeButton = form.querySelector(".close");
-
+  const newForm = document.getElementsByClassName("modal")[0];
+  if (document.querySelector("#icon-mode").classList.contains("fa-sun")) {
+    newForm.style.backgroundColor = "black";
+  }
   const closeAddTaskForm = () => {
     form.removeEventListener("submit", submitTask);
     closeButton.removeEventListener("click", closeAddTaskForm);
@@ -108,7 +111,6 @@ function showForm() {
     addTask(title, type, priority);
     closeAddTaskForm();
   };
-
   closeButton.addEventListener("click", closeAddTaskForm);
   form.addEventListener("submit", submitTask);
 }
@@ -236,8 +238,8 @@ function showSearchInput() {
   }
 }
 function removeSearchInput() {
-  const mainPage = document.getElementsByTagName("main")[0];
-  mainPage.removeChild(mainPage.childNodes[2]);
+  const mainPage = document.getElementsByClassName("searchSection")[0];
+  mainPage.parentNode.removeChild(mainPage);
   const taskList = document.querySelectorAll(".task");
   taskList.forEach((value, index) => {
     value.style.display = "";
@@ -469,4 +471,58 @@ function addTaskWithStatus(title, taskType, priority, status) {
 
 function deleteTask(e) {
   e.target.parentElement.parentElement.remove();
+}
+
+//DARK MODE
+var darkModeSwitcher = "true";
+
+function darkMode() {
+  if (darkModeSwitcher === "true") {
+    activateDarkMode();
+    darkModeSwitcher = "false";
+  } else {
+    deactivateDarkMode();
+    darkModeSwitcher = "true";
+  }
+}
+
+function activateDarkMode() {
+  document.getElementById("dark-mode-inner").innerHTML = "LIGHT MODE";
+  var iconLightMode = document.querySelector(".fa-moon");
+  iconLightMode.classList.remove("fa-moon");
+  iconLightMode.classList.add("fa-sun");
+  changeColors("dark");
+}
+
+function deactivateDarkMode() {
+  document.getElementById("dark-mode-inner").innerHTML = "DARK MODE";
+  var iconDarkMode = document.querySelector(".fa-sun");
+  iconDarkMode.classList.remove("fa-sun");
+  iconDarkMode.classList.add("fa-moon");
+  changeColors("light");
+}
+
+function changeColors(mode) {
+  const allSections = document.querySelectorAll("section");
+  const allTasks = document.querySelectorAll(".task");
+
+  if (mode === "dark") {
+    document.getElementsByTagName("main")[0].style.backgroundColor = "black";
+    allSections.forEach((value, index) => {
+      value.style.backgroundColor = "#222222";
+    });
+    allTasks.forEach((value, index) => {
+      value.style.backgroundColor = "black";
+    });
+    document.body.style.color = ["white"];
+  } else {
+    document.getElementsByTagName("main")[0].style.backgroundColor = "";
+    allSections.forEach((value, index) => {
+      value.style.backgroundColor = "";
+    });
+    allTasks.forEach((value, index) => {
+      value.style.backgroundColor = "";
+    });
+    document.body.style.color = [""];
+  }
 }
